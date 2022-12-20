@@ -1,0 +1,91 @@
+//implementation of stack using linked list
+#include<stdio.h>
+#include<stdlib.h>
+/*Function declarations*/
+void push();
+void pop();
+void display();
+int main() {
+  int choice;
+  while (1) {
+    printf("Operation performed by stack\n");"); /*taking user input for operation to be performed*/
+    printf("1.push\n");
+    printf("2.pop\n");
+    printf("3.display\n");
+    printf("4.exit\n");
+    scanf("%d", & choice);
+    switch (choice) {
+    case 1:
+      push();
+      break;
+    case 2:
+      pop();
+      break;
+    case 3:
+      display();
+      break;
+    case 4:
+      exit(0);
+    default:
+      printf("Invalid choice\n");
+    }
+  }
+}
+/*node declarations*/
+struct node {
+  int val;
+  struct node * next;
+};
+struct node * head;
+/*push operation is performed*/
+void push() {
+  int val;
+  struct node * ptr = (struct node * ) malloc(sizeof(struct node)); /*dynamic
+memory allocation of the malloc function*/
+  if (ptr == NULL) {
+    printf("not able to push the element");
+  } else {
+    printf("Enter the value\n");
+    scanf("%d", & val); 
+/*check the condition*/
+    if (head == NULL) {
+      ptr -> val = val; /*pointer value*/
+      ptr -> next = NULL;
+      head = ptr;
+    } else {
+      ptr -> val = val;
+      ptr -> next = head;
+      head = ptr;
+    }
+    printf("Item pushed\n");
+  }
+}
+/*pop operation is performed*/
+void pop() {
+  int item;
+  struct node * ptr;
+  if (head == NULL) {
+    printf("underflow");
+  } else {
+    item = head -> val;
+    ptr = head;
+    head = head -> next;
+    free(ptr);
+    printf("item popped\n");
+  }
+}
+/*display operation is performed*/
+void display() {
+  int i;
+  struct node * ptr;
+  ptr = head;
+  if (ptr == NULL) {
+    printf("stack is empty\n");
+  } else {
+    printf("printing stack elements\n");
+    while (ptr != NULL) {
+      printf("%d\n", ptr -> val);
+      ptr = ptr -> next;
+    }
+  }
+}
