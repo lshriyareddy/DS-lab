@@ -1,0 +1,64 @@
+/*Implementation of stack using array*/
+#include<stdio.h>
+#include<stdlib.h>
+#define size 4
+int top = -1, inp_arr[size]; /*initializing top value to -1*/
+/*Function declarations*/
+void push();
+void pop();
+void show();
+int main() {
+  int choice;
+  while (1) {
+    printf("Operation performed by stack\n"); /*taking user input for operation to be performed*/
+    printf("1.push\n");
+    printf("2.pop\n");
+    printf("3.show\n");
+    printf("4.exit\n");
+    scanf("%d", & choice);
+    switch (choice) {
+    case 1:
+      push();
+      break;
+    case 2:
+      pop();
+      break;
+    case 3:
+     show();
+      break;
+    case 4:
+      exit(0);
+    default:
+      printf("Invalid choice\n");
+    }
+  }
+}
+/*push operation function*/
+void push() {
+  int x;
+  if (top == size - 1) {
+    printf("Overflow\n");
+  } else {
+    printf("enter the elements to be inserted");
+    scanf("%d", & x); 
+    top = top + 1; /*Push the elements in the array, increment the value of top*/
+    inp_arr[top] = x;
+  }
+}
+/*pop operation function*/
+void pop() {
+  int x;
+  if (top == -1) {
+    printf("Underflow\n");
+  } else {
+    printf("Enter the element to be removed:%d\n", inp_arr[top]);
+    top--;
+  }
+}
+/*Display the operations*/
+void show() {
+  int i;
+  for (i = 0; i <= top; i++) {
+    printf("%d\n", inp_arr[i]);
+  }
+}
