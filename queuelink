@@ -1,0 +1,100 @@
+//Implementation of queue using linked list
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node                     //creating a node
+{ 
+  int data;
+  struct node *next;
+ };
+ struct node *front, *rear;
+
+void insert()                //function to insert element 
+{
+  int item;
+  struct node *ptr=(struct node *)malloc(sizeof(struct node));
+  if (ptr == NULL)        //checking if queue is full
+  {
+    printf("Overflow");
+    return;
+  }
+  else
+  { 
+    printf("Enter the element: \n");
+    scanf("%d", &item);
+    
+    ptr->data=item;
+    if(front == NULL)
+    {  
+      front=ptr;
+      rear=ptr;
+      front->next=NULL;
+      rear->next=NULL;
+    }
+    else
+    {
+      rear->next=ptr;
+      rear=ptr;
+      rear->next=NULL;
+    }
+  }
+}
+void delete()        //function to delete
+{
+  struct node *ptr=(struct node *)malloc(sizeof(struct node));
+  if(front==NULL)                //to check if queue is empty
+  {
+    printf("Underflow\n");
+    return;
+  }
+  else
+  {
+    ptr=front;
+    printf("Deleted element %d\n",ptr->data);
+    front=front->next;
+    free(ptr);
+  }
+}
+void display()       //display function
+{ 
+  struct node *ptr;
+  ptr=front;
+  if(ptr==NULL)
+  {
+    printf("Underflow\n");
+    return;
+  }
+  else
+  {
+    printf("Printing stack element: \n");
+    while(ptr!=NULL)
+    {
+      printf("%d\n",ptr->data);
+      ptr=ptr->next;
+    }
+  }
+}
+int main()
+{
+  int choice;
+  while(1)
+  {
+    printf("Operation performed by queue:\n");
+    printf("1.insert\n2.Delete\n3.Display\n4.Exit\n");
+    printf("Enter your choice: \n");
+    scanf("%d", &choice);
+    switch(choice)
+    {
+      case 1: insert();
+              break;
+      case 2: delete();
+              break;
+      case 3: display();
+              break; 
+      case 4: exit(0);
+              break;
+      default: printf("Invalid choice\n");
+    }
+  }
+  return 0;
+}       
